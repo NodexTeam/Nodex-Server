@@ -4,37 +4,85 @@
 <head>
   <title>NX TestUI</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      .form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      .form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      .form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
-    </style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font: 13px Helvetica, Arial;
+    }
+
+    .form {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .form input {
+      border: 0;
+      padding: 10px;
+      width: 90%;
+      margin-right: .5%;
+    }
+
+    .form button {
+      width: 9%;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
+
+    #messages {
+      margin-bottom: 40px
+    }
+  </style>
 </head>
+<!--max-download-limit=10240-->
 
 <body>
   <ul id="messages"></ul>
   <di class="form">
-    <input id="m" autocomplete="off" /><button id="sbutton">Send GlobalStats</button>
-    <input id="d" autocomplete="off" /><button id="dbutton">Add Download</button>
+    <input id="txt" autocomplete="off"
+      value="http://dl5.downloadha.com/hosein/NarmAfzaar/October2018/WinRAR.5.61.x64_www.Downloadha.com_.exe" />
+    <button id="start">StartDownload</button>
+    <button id="pause">Pause</button>
+    <button id="resume">Resume</button>
   </di>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
   <script type='text/javascript'>
     var socket = io('http://192.168.1.229:3000');
-    var room = Math.floor((Math.random() * 10) + 1);
+    var room = "111333";
 
     socket.on('connect', function () {
       // Connected, let's sign-up for to receive messages for this room
       socket.emit('room', room);
       //socket.join(room);
     });
+
+    socket.emit('joined', { room: room, msg: "" });
 
     socket.on('globalStat', function (msg) {
       $('#messages').append($('<li>').text("GlobalStats: " + msg));
@@ -44,32 +92,35 @@
       $('#messages').append($('<li>').text("addDownload: " + msg));
       window.scrollTo(0, document.body.scrollHeight);
     });
-
-    //Your Click event
-    $('#sbutton').click(function () {
-
-      socket.emit('globalStat', { room: room, msg: $('#m').val() });
-      $('#m').val('');
-
-
+    socket.on('waiting', function (msg) {
+      $('#messages').append($('<li>').text("waiting: " + msg));
+      window.scrollTo(0, document.body.scrollHeight);
     });
-    $('#dbutton').click(function () {
-      socket.emit('addDownload', $('#d').val());
-      $('#d').val('');
-
+    socket.on('stopped', function (msg) {
+      $('#messages').append($('<li>').text("stopped: " + msg));
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    socket.on('downloading', function (msg) {
+      $('#messages').append($('<li>').text("downloading: " + msg));
+      window.scrollTo(0, document.body.scrollHeight);
     });
 
-    $('#d').on('keypress', function (e) {
-      if (e.which == 13) {
-        socket.emit('addDownload', $('#d').val());
-        $('#d').val('');
-      }
+
+
+    $('#start').click(function () {
+      socket.emit('addDownload', { room: room, msg: { url: $('#txt').val(), offset: 10000 } });
+      $('#txt').val('');
+
     });
-    $('#m').on('keypress', function (e) {
-      if (e.which == 13) {
-        socket.emit('globalStat', $('#m').val());
-        $('#m').val('');
-      }
+    $('#pause').click(function () {
+      socket.emit('onPause', { room: room, msg: $('#txt').val() });
+      $('#txt').val('');
+
+    });
+    $('#resume').click(function () {
+      socket.emit('onResume', { room: room, msg: $('#txt').val() });
+      $('#txt').val('');
+
     });
 
 
