@@ -4,7 +4,7 @@ var registerSockets = function (io) {
         // once a client has connected, we expect to get a ping from them saying what room they want to join
 
         socket.on('room', function (room) {
-            console.log(room);
+            console.log("At room " + room);
             socket.join(room, function () {
 
                 io.sockets.in(room).emit('joined', "");
@@ -16,8 +16,11 @@ var registerSockets = function (io) {
         });
 
         socket.on('globalStat', function (msg, listener) {
-            console.log(msg);
             io.sockets.in(msg.room).emit('globalStat', msg.msg);
+        });
+        socket.on('storageInfo', function (msg, listener) {
+            console.log(msg);
+            io.sockets.in(msg.room).emit('storageInfo', msg.msg);
         });
 
         socket.on('addDownload', function (msg, listener) {

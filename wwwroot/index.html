@@ -73,7 +73,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
 
   <script type='text/javascript'>
-    var socket = io('http://192.168.1.229:3000');
+    var socket = io('http://' + window.location.hostname + ':3000');
     var room = "111333";
 
     socket.on('connect', function () {
@@ -102,6 +102,10 @@
     });
     socket.on('downloading', function (msg) {
       $('#messages').append($('<li>').text("downloading: " + msg));
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    socket.on('storageInfo', function (msg) {
+      $('#messages').append($('<li>').text("storageInfo: " + msg));
       window.scrollTo(0, document.body.scrollHeight);
     });
 
