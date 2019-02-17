@@ -19,8 +19,12 @@ var registerSockets = function (io) {
             io.sockets.in(msg.room).emit('globalStat', msg.msg);
         });
         socket.on('storageInfo', function (msg, listener) {
-            console.log(msg);
             io.sockets.in(msg.room).emit('storageInfo', msg.msg);
+        });
+
+        socket.on('changeOptions', function (msg, listener) {
+            console.log(msg);
+            io.sockets.in(msg.room).emit('changeOptions', msg.msg);
         });
 
         socket.on('addDownload', function (msg, listener) {

@@ -65,6 +65,9 @@
     <button id="start">StartDownload</button>
     <button id="pause">Pause</button>
     <button id="resume">Resume</button>
+    <button id="changedir">change dl dir</button>
+    <button id="speedLimit">change speed limit</button>
+    <button id="countLimit">Max Download Count</button>
   </di>
 
 
@@ -110,7 +113,6 @@
     });
 
 
-
     $('#start').click(function () {
       socket.emit('addDownload', { room: room, msg: { url: $('#txt').val(), offset: 10000 } });
       $('#txt').val('');
@@ -123,6 +125,23 @@
     });
     $('#resume').click(function () {
       socket.emit('onResume', { room: room, msg: $('#txt').val() });
+      $('#txt').val('');
+
+    });
+
+    $('#changedir').click(function () {
+      socket.emit('changeOptions', { room: room, msg: { downloadDir: $('#txt').val() } });
+      $('#txt').val('');
+
+    });
+    $('#speedLimit').click(function () {
+      socket.emit('changeOptions', { room: room, msg: { max_download_limit: $('#txt').val() + "K" } });
+      $('#txt').val('');
+
+    });
+
+    $('#countLimit').click(function () {
+      socket.emit('changeOptions', { room: room, msg: { max_download_count: $('#txt').val() } });
       $('#txt').val('');
 
     });
