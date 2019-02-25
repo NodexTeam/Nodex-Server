@@ -15,6 +15,10 @@ var registerSockets = function (io) {
             console.log(`DISconnected ${socket.id}`);
         });
 
+        socket.on('notify', function (msg, listener) {
+            io.sockets.in(msg.room).emit('notify', msg.msg);
+        });
+
         socket.on('globalStat', function (msg, listener) {
             io.sockets.in(msg.room).emit('globalStat', msg.msg);
         });
