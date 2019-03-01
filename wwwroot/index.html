@@ -68,6 +68,8 @@
     <button id="changedir">change dl dir</button>
     <button id="speedLimit">change speed limit</button>
     <button id="countLimit">Max Download Count</button>
+    <button id="ping">Send Ping</button>
+    <button id="delete">Delete</button>
   </di>
 
 
@@ -148,6 +150,19 @@
       $('#txt').val('');
 
     });
+
+    $('#delete').click(function () {
+      socket.emit('delete', { room: room, msg: $('#txt').val() });
+      $('#txt').val('');
+
+    });
+
+
+    $('#ping').click(function () {
+      socket.emit('ping', { room: room, msg: { pong: false } });
+
+    });
+
 
 
 

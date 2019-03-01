@@ -53,6 +53,9 @@ var registerSockets = function (io) {
         socket.on('delete', function (msg, listener) {
             io.sockets.in(msg.room).emit('delete', msg.msg);
         });
+        socket.on('ping', function (msg, listener) {
+            io.sockets.in(msg.room).emit('ping', msg.msg);
+        });
     });
 }
 
