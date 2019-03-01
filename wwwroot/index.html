@@ -106,7 +106,7 @@
       window.scrollTo(0, document.body.scrollHeight);
     });
     socket.on('peeng', function (msg) {
-      $('#messages').append($('<li>').text("peeng: " + msg));
+      $('#messages').append($('<li>').text("peeng: " + JSON.stringify(msg)));
       window.scrollTo(0, document.body.scrollHeight);
     });
     socket.on('downloading', function (msg) {
