@@ -1,0 +1,45 @@
+@import "./util.scss";
+
+.uk-breadcrumb {
+  font-size: 12px !important;
+  margin: 0 !important;
+  & > :nth-child(n + 2):not(.uk-first-column)::before {
+    margin: 0 10px;
+  }
+  li {
+    top: 1px;
+    position: relative;
+  }
+  & > * > * {
+    font-size: 13px;
+  }
+  & > :last-child > * {
+    color: #9a9a9a;
+  }
+}
+.uk-notification-message.uk-notification-message-danger {
+  opacity: 1;
+  margin-bottom: 0px;
+  background: #000000c2;
+  color: white;
+  text-align: center;
+  @extend .persian-font;
+}
+
+span.uk-label.uk-label-success {
+  margin: 0 !important;
+}
+
+h3.headTitle {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+#HardUseModal .uk-modal-body {
+  padding: 1rem;
+}
+
+.uk-list-divider > li:nth-child(n + 2) {
+  margin-top: 15px;
+  padding-top: 15px;
+}

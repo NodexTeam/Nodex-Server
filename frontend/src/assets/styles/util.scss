@@ -1,0 +1,65 @@
+@import "./variable.scss";
+
+progress {
+  -webkit-appearance: none;
+}
+
+::-webkit-progress-bar {
+  background-color: #e8e8e8 !important;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-block {
+  display: block;
+  margin: auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.bg-border {
+  padding: 15px;
+  background: white;
+  border: 1px solid $border-grey;
+  border-radius: 4px;
+}
+
+.uk-button-primary-gr {
+  background: rgba(254, 79, 107, 1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 129, 150, 1) 0%,
+    rgba(254, 79, 107, 1) 100%
+  );
+  padding: 5px 0;
+  color: #fff;
+  border-radius: 1px;
+}
+
+.digit-font {
+  * {
+    font-family: "bauhaus" !important;
+  }
+}
+
+.persian-font {
+  * {
+    font-family: "vazir" !important;
+  }
+}

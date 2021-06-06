@@ -1,0 +1,337 @@
+@import "./util.scss";
+@import "./variable.scss";
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "vazir" !important;
+}
+
+#root,
+.rtl,
+._loading_overlay_wrapper {
+  width: 100%;
+  direction: rtl;
+  display: flex;
+}
+
+body {
+  background: $background-grey;
+  font-size: 12px !important;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  margin: 0;
+}
+
+// ------------------------------------------------------------------------------------
+// NODEX_LAYOUT
+// ------------------------------------------------------------------------------------
+
+.sider {
+  background: white;
+  border-left: 1px solid $border-grey;
+  width: 6.2rem;
+  height: 100%;
+  min-height: 100vh;
+  .human-wrapper {
+    width: 100%;
+  }
+  
+  .sider-item {
+    position: relative;
+    margin: 25px 0;
+    text-align: center;
+    .uk-badge {
+      @extend .digit-font;
+      position: absolute;
+      top: 10px;
+      left: -10px;
+      min-width: 21px;
+      height: 20px;
+      background: white;
+      color: red;
+      border: 1px solid red;
+      font-size: 13px;
+    }
+    i {
+      color: $icon-grey;
+    }
+    p {
+      color: $text-grey;
+      margin: 10px 0;
+    }
+    &:hover:not(.active) {
+      p,
+      i {
+        color: #333 !important;
+        transition-duration: 0.3s;
+      }
+    }
+    &.active {
+      p,
+      i {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.header {
+  height: 4.8rem;
+  display: flex;
+  align-items: center;
+  background: white;
+  justify-content: space-between;
+  border-bottom: 1px solid $border-grey;
+  img {
+    height: 150%;
+  }
+}
+
+.content {
+  padding: 15px;
+  width: 100%;
+  height: calc(100vh - 4.9rem);
+  overflow: hidden;
+  &:hover {
+    overflow: auto;
+  }
+}
+
+// ------------------------------------------------------------------------------------
+// NODEX_COMPONENTS
+// ------------------------------------------------------------------------------------
+
+.CountBox {
+  @extend .bg-border;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  .count {
+    h2 {
+      @extend .digit-font;
+      direction: ltr;
+    }
+    text-align: center;
+    p {
+      margin: 10px 0;
+    }
+  }
+  transition: 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-3%);
+    background: $primary-color;
+    * {
+      color: white;
+    }
+  }
+}
+
+.DownloadBox {
+  @extend .digit-font;
+  background: white;
+  border: 1px solid $border-grey;
+  border-radius: 4px;
+  .head {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 15px 15px 1.7rem 15px;
+    .uk-icon {
+      color: #02afce;
+      // color: $text-grey;
+      padding-left: 0.1rem;
+    }
+    div {
+      width: 83%;
+      padding-left: 1rem;
+      top: 0.1rem;
+      position: relative;
+      h5 {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        @extend .digit-font;
+        margin-bottom: 0.2rem;
+      }
+      span {
+        @extend .digit-font;
+        min-width: 2.6rem;
+        font-size: 0.9rem;
+        color: $icon-grey;
+      }
+    }
+    h6 {
+      margin: 0;
+    }
+  }
+
+  .details {
+    padding: 0 15px;
+    span {
+      @extend .digit-font;
+      font-size: 0.8rem;
+    }
+    color: $icon-grey;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  progress {
+    height: 0.5rem;
+    width: 94%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .actions {
+    height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid #f3f3f3;
+    margin-top: 0.7rem;
+    background: #fdfdfd;
+    span {
+      color: #7b7b7b;
+      transition-duration: 0.2s;
+      &:hover {
+        color: black;
+      }
+      &.deactive {
+        color: $icon-grey;
+      }
+    }
+  }
+}
+
+.StorageBox {
+  padding: 15px;
+  background: white;
+  border: 1px solid #f3f3f3;
+  border-radius: 4px;
+  @extend .digit-font;
+}
+
+.NotFound {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h3 {
+    margin: 1rem;
+    color: #b9b9b9;
+  }
+  color: #b9b9b9;
+}
+
+// ------------------------------------------------------------------------------------
+// NODEX_PAGES
+// ------------------------------------------------------------------------------------
+
+.login {
+  .triangle-topleft {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 100vh solid $primary-color;
+    border-right: 100vw solid transparent;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0 19px 50px rgba(0, 0, 0, 0.1);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: white;
+    width: 30%;
+    height: 65%;
+    img {
+      padding: 10px;
+    }
+    h4 {
+      font-weight: bold;
+      margin: 10px;
+      margin-bottom: 20px;
+    }
+    input {
+      height: 50px;
+      margin: 10px 0;
+      border: 1px solid $text-grey;
+      border-radius: 1px;
+      &:focus {
+        border: 1px solid $primary-color;
+      }
+    }
+    .uk-icon {
+      color: $icon-grey;
+    }
+    form {
+      width: 100%;
+      .uk-inline {
+        width: 80%;
+        display: block;
+        margin: auto;
+      }
+      button {
+        transition: box-shadow 0.3s;
+        margin-top: 30px;
+        &:hover {
+          box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.16);
+        }
+      }
+    }
+  }
+}
+
+.fab {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  box-shadow: 0px 3px 18px #8c8c8c;
+  line-height: 1;
+  z-index: 9;
+}
+
+textarea {
+  text-align: left;
+  @extend .digit-font;
+}
+
+progress[value]::-webkit-progress-bar {
+  background: blue;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+span.uk-label.uk-label-success {
+  margin-top: 0.7rem;
+  font-family: vazir !important;
+  font-size: 12px;
+}
+
+.conn-fab {
+  left: 1rem !important;
+  right: unset !important;
+}
+
+.fab {
+  bottom: 1rem !important;
+
+}

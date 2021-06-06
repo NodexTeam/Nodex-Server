@@ -1,0 +1,16 @@
+@import "./util.scss";
+
+.ltr {
+  @extend .digit-font;
+  width: 100%;
+  display: flex;
+  direction: ltr !important;
+  .sider {
+    border-left: none;
+    border-right: 1px solid $border-grey;
+  }
+  .fab {
+    left: unset;
+    right: 1rem !important;
+  }
+}
