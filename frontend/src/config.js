@@ -6,7 +6,7 @@ export default {
   },
   api: {
     httpApiPrefix: "http://127.0.0.1:8585",
-    socketApiPrefix: "http://192.168.1.7:8585"
+    socketApiPrefix: "http://127.0.0.1:8585"
   },
   routes: {
     dashboard: "/dashboard",
